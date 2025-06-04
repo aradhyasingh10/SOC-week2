@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+typedef long long ll;
+#define PB push_back
+#define vi vector <int>
+#define mii map <int,int>
+#define pii pair <int,int>
+#define vvi vector <vector <int>>
+#define vc vector <char>
+#define all(v) v.begin(), v.end()
+#define rall(v) v.rbegin(), v.rend()
+#define FOR1(i, a, n) for (int i = a; i < n; i++)
+#define FOR2(i, a, n) for (int i = n - 1; i >= a; i--)
+
+using namespace std;
+
+void solve() {
+    string s; cin>>s;
+    int k; cin>>k;
+    int n = s.size();
+    vi str(26, 0);
+    FOR1 (i, 0, k) {
+        str[s[i]-'a']++;
+    }
+    int ans = (str[0]+str[4]+str[8]+str[14]+str[20]);
+    FOR1 (i, k, n) {
+        int vowelct = 0;
+        str[s[i-k]-'a']--;
+        str[s[i]-'a']++;
+        vowelct = (str[0]+str[4]+str[8]+str[14]+str[20]);
+        ans = max(vowelct, ans);
+    }
+    cout<<ans;
+}
+
+int main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    solve();
+}
