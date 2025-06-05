@@ -1,0 +1,35 @@
+class Solution {
+public:
+    int search(vector<int>& v, int x) {
+        int n = v.size();
+        int f = v[0];
+        int l = v[n - 1];
+        int start = 0, end = n - 1;
+        int pivot = 0;
+
+        while (start < end) {
+            int mid = (start + end) / 2;
+            if (v[mid] > v[end]) {
+                start = mid + 1;
+            } else {
+                end = mid;
+            }
+        }
+        pivot = start;
+
+        start = 0;
+        end = n - 1;
+        while (start <= end) {
+            int mid = (start + end) / 2;
+            int realMid = (mid + pivot) % n;
+            if (v[realMid] == x) {
+                return realMid;
+            } else if (v[realMid] < x) {
+                start = mid + 1;
+            } else {
+                end = mid - 1;
+            }
+        }
+        return -1;
+    }
+};
