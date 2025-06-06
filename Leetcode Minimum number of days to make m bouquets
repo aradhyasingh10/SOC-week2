@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int minDays(vector<int>& v, int m, int k) {
+        int n = v.size();
+        vector <int> s = v;
+        if (m*1ll*k <= n) {
+            int stday = *min_element(v.begin(), v.end());
+            int ltday = *max_element(v.begin(), v.end());
+            int day, ans;
+            while (stday<=ltday) {
+                day = (stday+ltday)/2;
+                int mct = 0, kct = 0;
+                for (int i = 0; i<n; i++) {
+                    if(v[i]<=day) kct++;
+                    else kct=0;
+                    if(kct==k) {
+                        mct++;
+                        kct=0;
+                    }
+                }
+                if (mct>=m) {
+                    ltday = day-1;
+                    ans = day;
+                }
+                if (mct<m) stday = day+1;
+            }
+            return ans;
+        }
+        return -1;
+    }
+};
